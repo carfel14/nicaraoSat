@@ -33,7 +33,11 @@ export default function LandingPage() {
               </div>
               <div className="space-x-4">
                 <Button className="bg-white text-[#5386e4] hover:bg-blue-50 hover:text-black" >Inicia</Button>
-                <Button  className="bg-white text-[#5386e4] hover:bg-blue-50 hover:text-black">Mapa Interactivo</Button>
+                <Button className="bg-white text-[#5386e4] hover:bg-blue-50 hover:text-black">
+                  <a href="/map">
+                  Mapa Interactivo
+                  </a>
+                  </Button>
               </div>
             </div>
           </div>
