@@ -6,7 +6,7 @@ import { Satellite, Map, AlertTriangle, BarChart3, Layers, Cpu, Users } from "lu
 import { useInView } from 'react-intersection-observer';
 import dashboardImage from '@/assets/dashboard.png'; 
 import mainImage from '@/assets/main.jpg';
-import logo from '@/assets/logo.svg';
+import { Navbar } from '@/components/navbar';
 
 export default function LandingPage() {
   const { ref: featuresRef, inView: featuresInView } = useInView({ triggerOnce: true });
@@ -16,15 +16,7 @@ export default function LandingPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-green-50 dark:from-blue-900 dark:to-green-900">
-      <header className="px-4 lg:px-6 h-22 flex items-center border-b border-blue-200 dark:border-blue-800 bg-white dark:bg-gray-800 sticky top-0 z-50">
-        <a className="flex items-center justify-center" href="#">
-          <img src={logo} className="h-20 w-20 mr-2 text-[#5386e4] dark:text-blue-400" /> 
-          <span className="font-bold text-2xl text-[#5386e4] dark:text-blue-300">NicaraoSat</span>
-        </a>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <a className="text-sm font-medium hover:text-[#5386e4] dark:hover:text-blue-400 transition-colors" href="/map">Mapa Interactivo</a>
-        </nav>
-      </header>
+      <Navbar />
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-64 relative">
           <img src={mainImage} alt="Mining operation" className="absolute inset-0 w-full h-full object-cover" />

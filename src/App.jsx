@@ -1,14 +1,14 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Home from '@/pages/Home';
-import Map from '@/components/InteractiveMap';
+import MapPage from '@/pages/Map';
 
 const App = () => {
   return (
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path='map' element ={<Map />} />
+        <Route path='map' element ={<MapPage />} />
       </Routes>     
       </BrowserRouter>
   );

@@ -177,7 +177,7 @@ function TimeSeriesChart({ data }) {
   )
 }
 
-export default function Component() {
+export function Map() {
   const [selectedSite, setSelectedSite] = useState(null)
   const [mapLoaded, setMapLoaded] = useState(false)
 
@@ -190,7 +190,7 @@ export default function Component() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="flex flex-col md:flex-row flex-grow">
       <div className="w-full md:w-3/5 h-1/2 md:h-full relative">
         {mapLoaded && <MapComponent onMarkerClick={handleMarkerClick} />}
       </div>
