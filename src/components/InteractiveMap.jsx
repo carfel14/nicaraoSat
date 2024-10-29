@@ -114,20 +114,36 @@ function MapComponent({ onMarkerClick }) {
 function DetailsSection({ site }) {
   if (!site) return null
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  // Check screen width and set state
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 1024); // Small screen breakpoint (e.g., 1024px)
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   return (
     <div className="bg-white rounded-lg shadow-lg transition-all duration-300 ease-in-out h-full flex flex-col">
-      <div className="p-6 flex-grow overflow-y-auto">
+      <div className={`p-6 flex-grow ${!isSmallScreen ? 'overflow-y-auto' : ''}`}>
         <h2 className="text-2xl font-bold mb-4">{site.name}</h2>
-        <div className="mb-4 relative w-full h-64 overflow-hidden rounded-md">
+        <div className={`mb-4 relative w-full h-64 rounded-md ${!isSmallScreen ? 'overflow-hidden' : ''}`}>
           <img
             src={site.image}
             alt={`Image of ${site.name}`}
             className="w-full h-full object-cover transition-all duration-300 hover:scale-105"
           />
           <div className="absolute bottom-0 right-0 m-2">
-            <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
-              site.status === 'Monitoreo In Situ' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
-            }`}>
+            <span
+              className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
+                site.status === 'Monitoreo In Situ' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+              }`}
+            >
               {site.status}
             </span>
           </div>
@@ -142,7 +158,7 @@ function DetailsSection({ site }) {
             <span className="text-lg">{site.humidity}%</span>
           </div>
           <div className="col-span-2">
-            <span className="font-semibold">Calidad del Aire:</span> 
+            <span className="font-semibold">Calidad del Aire:</span>
             <span className="ml-2 text-lg">{site.airQuality}</span>
           </div>
         </div>
@@ -152,7 +168,7 @@ function DetailsSection({ site }) {
         <TimeSeriesChart data={timeSeriesData[site.id]} />
       </div>
     </div>
-  )
+  );
 }
 
 function TimeSeriesChart({ data }) {
@@ -189,12 +205,26 @@ export function Map() {
     setSelectedSite(site)
   }
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  // Check screen width and set state
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 1024); // Small screen breakpoint (e.g., 1024px)
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   return (
     <div className="flex flex-col md:flex-row flex-grow">
       <div className="w-full md:w-3/5 h-1/2 md:h-full relative">
         {mapLoaded && <MapComponent onMarkerClick={handleMarkerClick} />}
       </div>
-      <div className="w-full md:w-2/5 h-1/2 md:h-full overflow-hidden">
+      <div className={`w-full md:w-2/5 h-1/2 md:h-full ${!isSmallScreen ? 'overflow-hidden' : ''}`}>
         {selectedSite ? (
           <DetailsSection site={selectedSite} />
         ) : (

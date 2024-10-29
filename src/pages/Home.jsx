@@ -15,7 +15,7 @@ export default function LandingPage() {
   const { ref: aboutRef, inView: aboutInView } = useInView({ triggerOnce: true });
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-green-50 dark:from-blue-900 dark:to-green-900">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-green-50 dark:from-blue-900 dark:to-green-900 overflow-hidden">
       <Navbar />
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-64 relative">
@@ -169,7 +169,9 @@ export default function LandingPage() {
                 de recursos sostenible y responsable a corto y largo plazo.
                 </p>
               </div>
-              <Button className="bg-amber-600 text-white hover:bg-amber-700">Conoce a nuestro equipo</Button>
+              <a href="/members">
+                <Button className="bg-amber-600 text-white hover:bg-amber-700">Conoce a nuestro equipo</Button>
+              </a>
             </div>
           </div>
         </section>
